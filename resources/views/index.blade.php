@@ -3,9 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
+        <title>DigiPrint</title>
         <link rel="stylesheet" type="text/css" href="{{ url('css/bootstrap4/bootstrap.min.css')}}">
         <link href="{{ url('plugins/fontawesome-free-5.0.1/css/fontawesome-all.css')}}" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="{{ url('plugins/OwlCarousel2-2.2.1/owl.carousel.css')}}">
@@ -15,15 +13,12 @@
         <link rel="stylesheet" type="text/css" href="{{ url('css/main_styles.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ url('css/responsive.css')}}">
     </head>
+
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
     <div class="super_container">
-	
 	<!-- Header -->
-	
 	<header class="header">
-
 		<!-- Top Bar -->
-
 		<div class="top_bar">
 			<div class="container">
 				<div class="row">
@@ -51,7 +46,7 @@
 					<!-- Logo -->
 					<div class="col-lg-2 col-sm-3 col-3 order-1">
 						<div class="logo_container">
-							<div class="logo"><a href="#">OneTech</a></div>
+							<div class="logo"><a href="#">DigiPrint</a></div>
 						</div>
 					</div>
 
@@ -163,8 +158,8 @@
 
 							<div class="main_nav_menu ml-auto">
 								<ul class="standard_dropdown main_nav_dropdown">
-									<li><a href="#">Home<i class="fas fa-chevron-down"></i></a></li>
-									<li><a href="blog.html">Tentang Kami<i class="fas fa-chevron-down"></i></a></li>
+									<li><a href="{{ url('welcome') }}">Home<i class="fas fa-chevron-down"></i></a></li>
+									<li><a href="{{ url('kontak') }}">Tentang Kami<i class="fas fa-chevron-down"></i></a></li>
 									<li><a href="contact.html">Hubungi Kami<i class="fas fa-chevron-down"></i></a></li>
 								</ul>
 							</div>
@@ -201,9 +196,9 @@
 								</form>
 							</div>
 								<li class="page_menu_item">
-									<a href="#">Home<i class="fa fa-angle-down"></i></a>
+									<a href="{{ url('kontak') }}">Home<i class="fa fa-angle-down"></i></a>
 								</li>
-								<li class="page_menu_item"><a href="blog.html">Tentang Kami<i class="fa fa-angle-down"></i></a></li>
+								<li class="page_menu_item"><a href="{{ url('kontak') }}">Tentang Kami<i class="fa fa-angle-down"></i></a></li>
 								<li class="page_menu_item"><a href="contact.html">Hubungi Kami<i class="fa fa-angle-down"></i></a></li>
 							</ul>
 						</div>
@@ -412,7 +407,7 @@
 											<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/featured_1.png" alt=""></div>
 											<div class="product_content">
 												<div class="product_price discount">$225<span>$300</span></div>
-												<div class="product_name"><div><a href="product.html">Huawei MediaPad...</a></div></div>
+												<div class="product_name"><div><a href="{{ url('produk') }}">Huawei MediaPad...</a></div></div>
 												<div class="product_extras">
 													<div class="product_color">
 														<input type="radio" checked name="product_color" style="background:#b19c83">
@@ -1892,8 +1887,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	</div>
 </div>
         <script src="{{ url('js/jquery-3.3.1.min.js')}}"></script>
-        <script src="{{ url('styles/bootstrap4/popper.js')}}"></script>
-        <script src="{{ url('styles/bootstrap4/bootstrap.min.js')}}"></script>
+        <script src="{{ url('css/bootstrap4/popper.js')}}"></script>
+        <script src="{{ url('css/bootstrap4/bootstrap.min.js')}}"></script>
         <script src="{{ url('plugins/greensock/TweenMax.min.js')}}"></script>
         <script src="{{ url('plugins/greensock/TimelineMax.min.js')}}"></script>
         <script src="{{ url('plugins/scrollmagic/ScrollMagic.min.js')}}"></script>
