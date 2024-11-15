@@ -22,6 +22,4 @@ class HomeController extends Controller
         // Kirim data ke view home.blade.php
         return view('home', compact('setting', 'products', 'categories'));
     }
-
-
 }
