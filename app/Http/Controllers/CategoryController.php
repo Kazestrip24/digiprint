@@ -11,7 +11,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();  // Mengambil semua kategori
-        return view('home', compact('categories'));
+        return view('category', compact('categories'));
     }
 
     // Menampilkan form untuk membuat kategori baru
