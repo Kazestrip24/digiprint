@@ -1,32 +1,18 @@
+<!-- resources/views/layouts/app.blade.php -->
+
+
 <!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Printing Store</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body class="bg-gray-100">
-
-    <header class="bg-blue-600 p-4 text-white">
-        <div class="max-w-7xl mx-auto flex justify-between">
-            <h1 class="text-xl font-bold">Toko Digital Printing</h1>
-            <nav>
-                <ul class="flex space-x-4">
-                    <li><a href="/" class="hover:text-gray-300">Home</a></li>
-                    <li><a href="/produk" class="hover:text-gray-300">Produk</a></li>
-                    <li><a href="/kontak" class="hover:text-gray-300">Kontak</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        @yield('content')
-    </main>
-
-    <footer class="bg-gray-800 text-white p-4 text-center">
-        &copy; 2024 Toko Digital Printing. All Rights Reserved.
-    </footer>
-</body>
-</html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>@yield('title', 'Default Title')</title>
+        <link rel="stylesheet" type="text/css" href="{{ url('css/bootstrap4/bootstrap.min.css')}}">
+        <link href="{{ url('plugins/fontawesome-free-5.0.1/css/fontawesome-all.css')}}" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="{{ url('plugins/OwlCarousel2-2.2.1/owl.carousel.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ url('plugins/OwlCarousel2-2.2.1/owl.theme.default.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ url('plugins/OwlCarousel2-2.2.1/animate.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ url('plugins/slick-1.8.0/slick.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ url('css/main_styles.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ url('css/responsive.css')}}">
+    </head>

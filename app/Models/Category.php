@@ -9,9 +9,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name', 'description',
-    ];
+    protected $fillable = ['name'];
 
     /**
      * Relasi: Kategori memiliki banyak produk
@@ -20,4 +18,9 @@ class Category extends Model
     {
         return $this->hasMany(Product::class); // Satu kategori memiliki banyak produk
     }
+        // Relasi produk ke kategori
+        public function category()
+        {
+            return $this->belongsTo(Category::class);
+        }
 }
