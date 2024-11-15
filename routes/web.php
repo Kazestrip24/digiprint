@@ -20,6 +20,8 @@ Route::get('/kontak', [ContactController::class, 'showContactForm'])->name('kont
 //Route::get('/', [SettingsController::class, 'index'])->name('settings.index');
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/products', [ProductController::class, 'showProductForm'])->name('product');
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+
 
 
 
