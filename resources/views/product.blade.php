@@ -65,7 +65,11 @@
 					<!-- Logo -->
 					<div class="col-lg-2 col-sm-3 col-3 order-1">
 						<div class="logo_container">
+<<<<<<< HEAD
 							<div class="logo"><a href="{{ url('/') }}">Digiprint</a></div>
+=======
+							<div class="logo"><a href="{{ url('/') }}">OneTech</a></div>
+>>>>>>> 1339f0b0c6db79ffe3d00054dadf609c79ed2b09
 						</div>
 					</div>
 
@@ -145,6 +149,7 @@
 								<ul class="cat_menu">
 								@foreach($categories as $category)
 									<li><a href="{{ route('category.show', $category->id) }}">{{ $category->name }} <i class="fas fa-chevron-right ml-auto"></i></a></li>
+<<<<<<< HEAD
 									@endforeach
 									<li><a href="#">Cameras & Photos<i class="fas fa-chevron-right"></i></a></li>
 									<li class="hassubs">
@@ -167,6 +172,9 @@
 									<li><a href="#">Stiker<i class="fas fa-chevron-right"></i></a></li>
 									<li><a href="#">Spanduk<i class="fas fa-chevron-right"></i></a></li>
 									<li><a href="#">Kertas<i class="fas fa-chevron-right"></i></a></li>
+=======
+								@endforeach
+>>>>>>> 1339f0b0c6db79ffe3d00054dadf609c79ed2b09
 								</ul>
 							</div>
 

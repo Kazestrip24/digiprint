@@ -7,15 +7,9 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 
 
-Route::get('/produk', function () {
-    return view('produk');
-});
-Route::get('/kontak', function () {
-    return view('kontak');
-});
-Route::get('/product', function () {
-    return view('product');
-});
+
+
+
 Route::resource('categories', CategoryController::class);
 Route::get('/products', [ProductController::class, 'index'])->name('product.index');
 Route::get('/product/{id}', [ProductController::class, 'showProduct'])->name('product.show');
@@ -25,7 +19,7 @@ Route::get('/category/{id}', [CategoryController::class, 'show'])->name('categor
 Route::get('/kontak', [ContactController::class, 'showContactForm'])->name('kontak');
 //Route::get('/', [SettingsController::class, 'index'])->name('settings.index');
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
-
+Route::get('/products', [ProductController::class, 'showProductForm'])->name('product');
 
 
 
