@@ -70,7 +70,11 @@
 					<div class="col-lg-2 col-sm-3 col-3 order-1">
 						<div class="logo_container">
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<div class="logo"><a href="{{ url('/') }}">DigiPrint</a></div>
+=======
+							<div class="logo"><a href="{{ url('/') }}">OneTech</a></div>
+>>>>>>> 1339f0b0c6db79ffe3d00054dadf609c79ed2b09
 =======
 							<div class="logo"><a href="{{ url('/') }}">OneTech</a></div>
 >>>>>>> 1339f0b0c6db79ffe3d00054dadf609c79ed2b09

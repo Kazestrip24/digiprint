@@ -16,8 +16,11 @@
         <link rel="stylesheet" type="text/css" href="{{ url('css/main_styles.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ url('css/responsive.css')}}">
 <<<<<<< HEAD
+<<<<<<< HEAD
     </head>
 =======
+=======
+>>>>>>> 1339f0b0c6db79ffe3d00054dadf609c79ed2b09
     </head>
 
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
@@ -206,5 +209,9 @@
 					</div>
 				</div>
 			</div>
+<<<<<<< HEAD
+		</nav>
+>>>>>>> 1339f0b0c6db79ffe3d00054dadf609c79ed2b09
+=======
 		</nav>
 >>>>>>> 1339f0b0c6db79ffe3d00054dadf609c79ed2b09
