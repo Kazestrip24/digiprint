@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-namespace App\Http\Controllers;
-
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -13,7 +11,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();  // Mengambil semua kategori
-        return view('categories.index', compact('categories'));
+        return view('home', compact('categories'));
     }
 
     // Menampilkan form untuk membuat kategori baru
@@ -21,13 +19,21 @@ class CategoryController extends Controller
     {
         return view('categories.create');
     }
+    public function show($id)
+{
+    // Ambil kategori dan produk yang terkait
+    $category = Category::findOrFail($id);
+    $products = $category->products; // Asumsi produk memiliki relasi ke kategori
+
+    return view('category', compact('category', 'products'));
+}
 
     // Menyimpan kategori baru
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required',
-            'description' => 'nullable',
+            
         ]);
 
         Category::create($request->all()); // Menyimpan kategori
@@ -46,7 +52,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'description' => 'nullable',
+            
         ]);
 
         $category->update($request->all()); // Memperbarui kategori
@@ -61,5 +67,6 @@ class CategoryController extends Controller
 
         return redirect()->route('categories.index');
     }
+    
 }
 

@@ -66,11 +66,14 @@ class ProductController extends Controller
     {
         // Cek apakah produk dengan id ditemukan
         $product = Product::find($id);  // Menggunakan find() atau findOrFail()
+            // Cari produk berdasarkan ID, beserta kategori terkait
+        $product = Product::with('category')->findOrFail($id);
+        $categories = Category::all();
 
         if (!$product) {
             return abort(404);  // Jika produk tidak ditemukan, tampilkan halaman 404
         }
 
-        return view('product', compact('product'));
+        return view('product', compact('product', 'categories'));
     }
 }
