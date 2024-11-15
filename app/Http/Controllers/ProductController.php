@@ -34,8 +34,9 @@ class ProductController extends Controller
         $imagePath = null;
         if ($request->hasFile('image')) {
             $image = $request->file('image');
+           // Membuat nama file gambar sesuai nama produk
             $imageName = $productName . '.' . $image->getClientOriginalExtension();
-            $imagePath = $image->storeAs('public/images', $imageName); // Menyimpan dengan nama yang ditentukan
+            $imagePath = $image->storeAs('public/products', $imageName);
         }
 
         // Menyimpan produk ke dalam database
@@ -44,17 +45,32 @@ class ProductController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'category_id' => $request->category_id,
-            'image' => basename($imagePath), // Simpan hanya nama file gambar
+            'image' => basename($imagePath), // Hanya nama file gambar yang disimpan
+
         ]);
 
+        
+
         // Redirect ke halaman index atau halaman lain setelah produk disimpan
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')->with('success', 'Produk berhasil ditambahkan');
     }
 
     // Menampilkan daftar produk
     public function index()
     {
         $products = Product::all(); // Ambil semua produk
-        return view('products.index', compact('products')); // Menampilkan daftar produk
+        return view('index', compact('products')); // Menampilkan daftar produk
+    }
+    // Menampilkan detail produk berdasarkan id
+    public function show($id)
+    {
+        // Cek apakah produk dengan id ditemukan
+        $product = Product::find($id);  // Menggunakan find() atau findOrFail()
+
+        if (!$product) {
+            return abort(404);  // Jika produk tidak ditemukan, tampilkan halaman 404
+        }
+
+        return view('product', compact('product'));
     }
 }
