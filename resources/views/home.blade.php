@@ -28,8 +28,16 @@
 						<div class="top_bar_content ml-auto">
 							<div class="top_bar_user">
 								<div class="user_icon"><img src="images/user.svg" alt=""></div>
+								@guest
 								<div><a href="#">Register</a></div>
-								<div><a href="#">Sign in</a></div>
+								<div><a href="{{ route('login') }}">Sign in</a></div>
+								@else
+								    <!-- Tombol logout untuk pengguna yang sudah login -->
+									<form method="POST" action="{{ route('logout') }}">
+								@csrf
+								<button type="submit" class="btn btn-danger">Logout</button>
+							</form>
+								@endguest
 							</div>
 						</div>
 					</div>

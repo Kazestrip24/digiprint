@@ -68,5 +68,13 @@ class CategoryController extends Controller
         return redirect()->route('categories.index');
     }
     
+    public function showCategory($id)
+{
+    $category = Category::find($id); // Ganti sesuai model Anda
+    $products = $category->products; // Pastikan relasi `products` didefinisikan di model Category
+
+    return view('category', compact('category', 'products'));
+}
+
 }
 

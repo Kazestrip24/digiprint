@@ -113,11 +113,11 @@
 								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
 									<div class="cart_icon">
 										<img src="images/cart.png" alt="">
-										<div class="cart_count"><span>10</span></div>
+										<div class="cart_count"><span>{{ count(session()->get('cart', [])) }}</span></div>
 									</div>
 									<div class="cart_content">
-										<div class="cart_text"><a href="#">Cart</a></div>
-										<div class="cart_price">$85</div>
+										<div class="cart_text"><a href="{{ route('cart.index') }}">Cart</a></div>
+										<div class="cart_price">${{ number_format($totalPrice ?? 0, 2) }}</div>
 									</div>
 								</div>
 							</div>
@@ -322,8 +322,33 @@
 
 								<div class="product_price">Rp. {{ number_format($product->price, 2) }}</div>
 								<div class="button_container">
-									<button type="button" class="button cart_button">Add to Cart</button>
-									<div class="product_fav"><i class="fas fa-heart"></i></div>
+								<a href="#" class="button cart_button" onclick="addToCart({{ $product->id }}, 1)">Add to Cart</a>
+								<script>
+									function addToCart(productId, quantity) {
+										$.ajax({
+											url: '{{ route('cart.add') }}',
+											method: 'POST',
+											data: {
+												_token: '{{ csrf_token() }}',
+												product_id: productId,
+												quantity: quantity
+											},
+											success: function(response) {
+												// Pastikan respons berisi message dan tampilkan alert
+												if (response && response.message) {
+													alert(response.message);  // Tampilkan pesan dari server
+												} else {
+													alert('Produk berhasil ditambahkan ke keranjang.');
+												}
+											},
+											error: function(xhr, status, error) {
+												console.log(xhr.responseText); // Tampilkan log error jika ada
+												alert('Terjadi kesalahan saat menambahkan produk ke keranjang.');
+											}
+										});
+									}
+								</script>
+								<div class="product_fav"><i class="fas fa-heart"></i></div>
 								</div>
 								
 							</form>
@@ -625,6 +650,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="{{ url('plugins/OwlCarousel2-2.2.1/owl.carousel.js')}}"></script>
 <script src="{{ url('plugins/easing/easing.js')}}"></script>
 <script src="{{ url('js/product_custom.js')}}"></script>
+
 </body>
 
 </html>
