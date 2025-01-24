@@ -26,13 +26,21 @@
 					<div class="row">
 						<div class="col d-flex flex-row">
 							<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/phone.png" alt=""></div>+38 068 005 3570</div>
-							<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/mail.png" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
+							<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/mail.png" alt=""></div><a href="mailto:digiprint@gmail.com">digiprint@gmail.com</a></div>
 							<div class="top_bar_content ml-auto">
-								<div class="top_bar_user">
-									<div class="user_icon"><img src="images/user.svg" alt=""></div>
-									<div><a href="#">Register</a></div>
-									<div><a href="#">Sign in</a></div>
-								</div>
+							<div class="top_bar_user">
+								<div class="user_icon"><img src="images/user.svg" alt=""></div>
+								@guest
+								<div><a href="{{ route('register') }}">Register</a></div>
+								<div><a href="{{ route('login') }}">Sign in</a></div>
+								@else
+								    <!-- Tombol logout untuk pengguna yang sudah login -->
+									<form method="POST" action="{{ route('logout') }}">
+								@csrf
+								<button type="submit" class="btn btn-danger">Logout</button>
+							</form>
+								@endguest
+							</div>
 							</div>
 						</div>
 					</div>
@@ -40,7 +48,6 @@
 			</div>
 	
 			<!-- Header Main -->
-	
 			<div class="header_main">
 				<div class="container">
 					<div class="row">
@@ -48,7 +55,7 @@
 						<!-- Logo -->
 						<div class="col-lg-2 col-sm-3 col-3 order-1">
 							<div class="logo_container">
-								<div class="logo"><a href="#">DigiPrint</a></div>
+								<div class="logo"><a href="{{ url('/') }}">DigiPrint</a></div>
 							</div>
 						</div>
 	
@@ -64,12 +71,9 @@
 													<span class="custom_dropdown_placeholder clc">All Categories</span>
 													<i class="fas fa-chevron-down"></i>
 													<ul class="custom_list clc">
-														<li><a class="clc" href="#">All Categories</a></li>
-														<li><a class="clc" href="#">Computers</a></li>
-														<li><a class="clc" href="#">Laptops</a></li>
-														<li><a class="clc" href="#">Cameras</a></li>
-														<li><a class="clc" href="#">Hardware</a></li>
-														<li><a class="clc" href="#">Smartphones</a></li>
+													@foreach($categories as $category)
+														<li><a class="clc" href="{{ route('category.show', $category->id) }}">{{ $category->name }}</a></li>
+														@endforeach
 													</ul>
 												</div>
 											</div>
@@ -84,26 +88,22 @@
 						<div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
 							<div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
 								<div class="wishlist d-flex flex-row align-items-center justify-content-end">
-									<div class="wishlist_icon"><img src="images/heart.png" alt=""></div>
-									<div class="wishlist_content">
-										<div class="wishlist_text"><a href="#">Wishlist</a></div>
-										<div class="wishlist_count">115</div>
-									</div>
+
 								</div>
 	
 								<!-- Cart -->
 								<div class="cart">
-									<div class="cart_container d-flex flex-row align-items-center justify-content-end">
-										<div class="cart_icon">
-											<img src="images/cart.png" alt="">
-											<div class="cart_count"><span>10</span></div>
-										</div>
-										<div class="cart_content">
-											<div class="cart_text"><a href="#">Cart</a></div>
-											<div class="cart_price">$85</div>
-										</div>
+								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
+									<div class="cart_icon">
+										<img src="images/cart.png" alt="">
+										<div class="cart_count"><span>{{ count(session()->get('cart', [])) }}</span></div>
+									</div>
+									<div class="cart_content">
+										<div class="cart_text"><a href="{{ route('cart.index') }}">Cart</a></div>
+										<div class="cart_price">${{ number_format($totalPrice ?? 0, 2) }}</div>
 									</div>
 								</div>
+							</div>
 							</div>
 						</div>
 					</div>
@@ -138,52 +138,7 @@
 								<div class="main_nav_menu ml-auto">
 									<ul class="standard_dropdown main_nav_dropdown">
 										<li><a href="{{ url('/') }}">Home<i class="fas fa-chevron-down"></i></a></li>
-										<li class="hassubs">
-											<a href="#">Super Deals<i class="fas fa-chevron-down"></i></a>
-											<ul>
-												<li>
-													<a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-													<ul>
-														<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-														<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-														<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-													</ul>
-												</li>
-												<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-												<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-												<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-											</ul>
-										</li>
-										<li class="hassubs">
-											<a href="#">Featured Brands<i class="fas fa-chevron-down"></i></a>
-											<ul>
-												<li>
-													<a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-													<ul>
-														<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-														<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-														<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-													</ul>
-												</li>
-												<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-												<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-												<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-											</ul>
-										</li>
-										<li class="hassubs">
-											<a href="#">Pages<i class="fas fa-chevron-down"></i></a>
-											<ul>
-												<li><a href="shop.html">Shop<i class="fas fa-chevron-down"></i></a></li>
-												<li><a href="product.html">Product<i class="fas fa-chevron-down"></i></a></li>
-												<li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
-												<li><a href="blog_single.html">Blog Post<i class="fas fa-chevron-down"></i></a></li>
-												<li><a href="regular.html">Regular Post<i class="fas fa-chevron-down"></i></a></li>
-												<li><a href="cart.html">Cart<i class="fas fa-chevron-down"></i></a></li>
-												<li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
-											</ul>
-										</li>
-										<li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
-										<li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
+										<li><a href="{{ url('kontak') }}">Contact<i class="fas fa-chevron-down"></i></a></li>
 									</ul>
 								</div>
 	
@@ -217,68 +172,6 @@
 										<input type="search" required="required" class="page_menu_search_input" placeholder="Search for products...">
 									</form>
 								</div>
-								<ul class="page_menu_nav">
-									<li class="page_menu_item has-children">
-										<a href="#">Language<i class="fa fa-angle-down"></i></a>
-										<ul class="page_menu_selection">
-											<li><a href="#">English<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Italian<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Spanish<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Japanese<i class="fa fa-angle-down"></i></a></li>
-										</ul>
-									</li>
-									<li class="page_menu_item has-children">
-										<a href="#">Currency<i class="fa fa-angle-down"></i></a>
-										<ul class="page_menu_selection">
-											<li><a href="#">US Dollar<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">EUR Euro<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">GBP British Pound<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">JPY Japanese Yen<i class="fa fa-angle-down"></i></a></li>
-										</ul>
-									</li>
-									<li class="page_menu_item">
-										<a href="{{ url('/') }}">Home<i class="fa fa-angle-down"></i></a>
-									</li>
-									<li class="page_menu_item has-children">
-										<a href="#">Super Deals<i class="fa fa-angle-down"></i></a>
-										<ul class="page_menu_selection">
-											<li><a href="#">Super Deals<i class="fa fa-angle-down"></i></a></li>
-											<li class="page_menu_item has-children">
-												<a href="#">Menu Item<i class="fa fa-angle-down"></i></a>
-												<ul class="page_menu_selection">
-													<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-													<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-													<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-													<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-												</ul>
-											</li>
-											<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-										</ul>
-									</li>
-									<li class="page_menu_item has-children">
-										<a href="#">Featured Brands<i class="fa fa-angle-down"></i></a>
-										<ul class="page_menu_selection">
-											<li><a href="#">Featured Brands<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-										</ul>
-									</li>
-									<li class="page_menu_item has-children">
-										<a href="#">Trending Styles<i class="fa fa-angle-down"></i></a>
-										<ul class="page_menu_selection">
-											<li><a href="#">Trending Styles<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-										</ul>
-									</li>
-									<li class="page_menu_item"><a href="blog.html">blog<i class="fa fa-angle-down"></i></a></li>
-									<li class="page_menu_item"><a href="contact.html">contact<i class="fa fa-angle-down"></i></a></li>
-								</ul>
-								
 								<div class="menu_contact">
 									<div class="menu_contact_item"><div class="menu_contact_icon"><img src="images/phone_white.png" alt=""></div>+38 068 005 3570</div>
 									<div class="menu_contact_item"><div class="menu_contact_icon"><img src="images/mail_white.png" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
@@ -301,48 +194,9 @@
 						<div class="sidebar_section">
 							<div class="sidebar_title">Categories</div>
 							<ul class="sidebar_categories">
-								<li><a href="#">Computers & Laptops</a></li>
-								<li><a href="#">Cameras & Photos</a></li>
-								<li><a href="#">Hardware</a></li>
-								<li><a href="#">Smartphones & Tablets</a></li>
-								<li><a href="#">TV & Audio</a></li>
-								<li><a href="#">Gadgets</a></li>
-								<li><a href="#">Car Electronics</a></li>
-								<li><a href="#">Video Games & Consoles</a></li>
-								<li><a href="#">Accessories</a></li>
-							</ul>
-						</div>
-						<div class="sidebar_section filter_by_section">
-							<div class="sidebar_title">Filter By</div>
-							<div class="sidebar_subtitle">Price</div>
-							<div class="filter_price">
-								<div id="slider-range" class="slider_range"></div>
-								<p>Range: </p>
-								<p><input type="text" id="amount" class="amount" readonly style="border:0; font-weight:bold;"></p>
-							</div>
-						</div>
-						<div class="sidebar_section">
-							<div class="sidebar_subtitle color_subtitle">Color</div>
-							<ul class="colors_list">
-								<li class="color"><a href="#" style="background: #b19c83;"></a></li>
-								<li class="color"><a href="#" style="background: #000000;"></a></li>
-								<li class="color"><a href="#" style="background: #999999;"></a></li>
-								<li class="color"><a href="#" style="background: #0e8ce4;"></a></li>
-								<li class="color"><a href="#" style="background: #df3b3b;"></a></li>
-								<li class="color"><a href="#" style="background: #ffffff; border: solid 1px #e1e1e1;"></a></li>
-							</ul>
-						</div>
-						<div class="sidebar_section">
-							<div class="sidebar_subtitle brands_subtitle">Brands</div>
-							<ul class="brands_list">
-								<li class="brand"><a href="#">Apple</a></li>
-								<li class="brand"><a href="#">Beoplay</a></li>
-								<li class="brand"><a href="#">Google</a></li>
-								<li class="brand"><a href="#">Meizu</a></li>
-								<li class="brand"><a href="#">OnePlus</a></li>
-								<li class="brand"><a href="#">Samsung</a></li>
-								<li class="brand"><a href="#">Sony</a></li>
-								<li class="brand"><a href="#">Xiaomi</a></li>
+								@foreach($categories as $category)
+								<li><a href="{{ route('category.show', $category->id) }}">{{ $category->name }}</a></li>
+								@endforeach
 							</ul>
 						</div>
 					</div>
@@ -355,7 +209,7 @@
 
 					<div class="shop_content">
 						<div class="shop_bar clearfix">
-							<div class="shop_product_count"><span>186</span> products found</div>
+							<div class="shop_product_count"><span></span> products found</div>
 							<div class="shop_sorting">
 								<span>Sort by:</span>
 								<ul>
@@ -376,11 +230,16 @@
 
 							@foreach ($products as $product)
     <!-- Product Item -->
+	<a href="{{ route('product.show', ['id' => $product->id]) }}" class="product_link">
     <div class="product_item is_new">
         <div class="product_border"></div>
+		@if($product->image)
         <div class="product_image d-flex flex-column align-items-center justify-content-center">
-            <img src="images/new_5.jpg" alt="">
+            <img src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->name }}">
         </div>
+		@else
+            <p>No image available</p>
+            @endif
         <div class="product_content">
             <div class="product_price">Rp. {{ number_format($product->price, 2) }}</div>
             <div class="product_name">
@@ -390,25 +249,10 @@
             </div>
         </div>
         <div class="product_fav"><i class="fas fa-heart"></i></div>
-        <ul class="product_marks">
-            <li class="product_mark product_new">new</li>
-        </ul>
     </div>
+	</a>
 @endforeach
 
-						<!-- Shop Page Navigation -->
-
-						<div class="shop_page_nav d-flex flex-row">
-							<div class="page_prev d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-left"></i></div>
-							<ul class="page_nav d-flex flex-row">
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">...</a></li>
-								<li><a href="#">21</a></li>
-							</ul>
-							<div class="page_next d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-right"></i></div>
-						</div>
 
 					</div>
 
@@ -416,26 +260,21 @@
 			</div>
 		</div>
 	</div>
-        	<!-- Copyright -->
+
+	
+
+	<!-- Copyright -->
 
 	<div class="copyright">
 		<div class="container">
 			<div class="row">
 				<div class="col">
 					
-					<div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
+				<div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
 						<div class="copyright_content"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved <i class="fa fa-heart" aria-hidden="true"></i></a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 </div>
-						<div class="logos ml-sm-auto">
-							<ul class="logos_list">
-								<li><a href="#"><img src="images/logos_1.png" alt=""></a></li>
-								<li><a href="#"><img src="images/logos_2.png" alt=""></a></li>
-								<li><a href="#"><img src="images/logos_3.png" alt=""></a></li>
-								<li><a href="#"><img src="images/logos_4.png" alt=""></a></li>
-							</ul>
-						</div>
 					</div>
 				</div>
 			</div>

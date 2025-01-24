@@ -1,28 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<title>Cart</title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="OneTech shop project">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>DigiPrint</title>
         <link rel="stylesheet" type="text/css" href="{{ url('css/bootstrap4/bootstrap.min.css')}}">
         <link href="{{ url('plugins/fontawesome-free-5.0.1/css/fontawesome-all.css')}}" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" type="text/css" href="{{ url('css/cart_styles.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{ url('css/cart_responsive.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ url('plugins/OwlCarousel2-2.2.1/owl.carousel.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ url('plugins/OwlCarousel2-2.2.1/owl.theme.default.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ url('plugins/OwlCarousel2-2.2.1/animate.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ url('plugins/slick-1.8.0/slick.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ url('css/main_styles.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ url('css/responsive.css')}}">
+    </head>
 
-</head>
-
-<body>
-
-<div class="super_container">
-	
+    <body class="font-sans antialiased dark:bg-black dark:text-white/50">
+    <div class="super_container">
 	<!-- Header -->
-	
 	<header class="header">
-
 		<!-- Top Bar -->
-
 		<div class="top_bar">
 			<div class="container">
 				<div class="row">
@@ -31,7 +27,7 @@
 						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/mail.png" alt=""></div><a href="mailto:digiprint@gmail.com">digiprint@gmail.com</a></div>
 						<div class="top_bar_content ml-auto">
 							<div class="top_bar_user">
-							<div class="user_icon"><img src="images/user.svg" alt=""></div>
+								<div class="user_icon"><img src="images/user.svg" alt=""></div>
 								@guest
 								<div><a href="{{ route('register') }}">Register</a></div>
 								<div><a href="{{ route('login') }}">Sign in</a></div>
@@ -74,10 +70,13 @@
 												<span class="custom_dropdown_placeholder clc">All Categories</span>
 												<i class="fas fa-chevron-down"></i>
 												<ul class="custom_list clc">
-												@foreach($categories as $category)
-														<li><a class="clc" href="{{ route('category.show', $category->id) }}">{{ $category->name }}</a></li>
-														@endforeach
-													</ul>
+													<li><a class="clc" href="#">All Categories</a></li>
+													<li><a class="clc" href="#">Computers</a></li>
+													<li><a class="clc" href="#">Laptops</a></li>
+													<li><a class="clc" href="#">Cameras</a></li>
+													<li><a class="clc" href="#">Hardware</a></li>
+													<li><a class="clc" href="#">Smartphones</a></li>
+												</ul>
 											</div>
 										</div>
 										<button type="submit" class="header_search_button trans_300" value="Submit"><img src="images/search.png" alt=""></button>
@@ -91,6 +90,11 @@
 					<div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
 						<div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
 							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
+								<div class="wishlist_icon"><img src="images/heart.png" alt=""></div>
+								<div class="wishlist_content">
+									<div class="wishlist_text"><a href="#">Wishlist</a></div>
+									<div class="wishlist_count"></div>
+								</div>
 							</div>
 
 							<!-- Cart -->
@@ -98,11 +102,11 @@
 								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
 									<div class="cart_icon">
 										<img src="images/cart.png" alt="">
-										<div class="cart_count"><span>{{ count(session()->get('cart', [])) }}</span></div>
+										<div class="cart_count"><span>10</span></div>
 									</div>
 									<div class="cart_content">
-										<div class="cart_text"><a href="{{ route('cart.index') }}">Cart</a></div>
-										<div class="cart_price">${{ number_format($totalPrice ?? 0, 2) }}</div>
+										<div class="cart_text"><a href="#">Cart</a></div>
+										<div class="cart_price"></div>
 									</div>
 								</div>
 							</div>
@@ -131,8 +135,8 @@
 
 								<ul class="cat_menu">
 								@foreach($categories as $category)
-										<li><a href="{{ route('category.show', $category->id) }}">{{ $category->name }} <i class="fas fa-chevron-right ml-auto"></i></a></li>
-										@endforeach
+									<li><a href="{{ route('category.show', $category->id) }}">{{ $category->name }} <i class="fas fa-chevron-right ml-auto"></i></a></li>
+									@endforeach
 								</ul>
 							</div>
 
@@ -140,7 +144,7 @@
 
 							<div class="main_nav_menu ml-auto">
 								<ul class="standard_dropdown main_nav_dropdown">
-									<li><a href="{{ url('/') }}">Home<i class="fas fa-chevron-down"></i></a></li>
+									<li><a href="{{ url('welcome') }}">Home<i class="fas fa-chevron-down"></i></a></li>
 									<li><a href="{{ url('kontak') }}">Hubungi Kami<i class="fas fa-chevron-down"></i></a></li>
 								</ul>
 							</div>
@@ -161,81 +165,137 @@
 				</div>
 			</div>
 		</nav>
+		
+		<!-- Menu -->
+
+		<div class="page_menu">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						
+						<div class="page_menu_content">
+							
+							<div class="page_menu_search">
+								<form action="#">
+									<input type="search" required="required" class="page_menu_search_input" placeholder="Search for products...">
+								</form>
+							</div>
+								<li class="page_menu_item">
+									<a href="{{ url('kontak') }}">Home<i class="fa fa-angle-down"></i></a>
+								</li>
+								<li class="page_menu_item"><a href="{{ url('kontak') }}">Tentang Kami<i class="fa fa-angle-down"></i></a></li>
+								<li class="page_menu_item"><a href="contact.html">Hubungi Kami<i class="fa fa-angle-down"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 	</header>
-
-	<!-- Cart -->
-
-	<div class="cart_section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-10 offset-lg-1">
-                <div class="cart_container">
-                    <div class="cart_title">Shopping Cart</div>
-                    <div class="cart_items">
-                        <ul class="cart_list">
-                            @foreach ($cartItems as $item) <!-- Looping untuk setiap item dalam keranjang -->
-                                <li class="cart_item clearfix">
-                                    @if($item['image']) <!-- Akses image dari array $item -->
-                                        <div class="cart_item_image">
-                                            <img src="{{ asset('storage/products/' . $item['image']) }}" alt="{{ $item['name'] }}">
-                                        </div>
-                                    @else
-                                        <p>No image available</p>
-                                    @endif
-                                    <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
-                                        <div class="cart_item_name cart_info_col">
-                                            <div class="cart_item_title">Name</div>
-                                            <div class="cart_item_text">{{ $item['name'] }}</div> <!-- Akses nama dari array $item -->
-                                        </div>
-                                        <div class="cart_item_color cart_info_col">
-                                            <div class="cart_item_title">Color</div>
-                                            <div class="cart_item_text"><span style="background-color:#999999;"></span>Silver</div>
-                                        </div>
-                                        <div class="cart_item_quantity cart_info_col">
-                                            <div class="cart_item_title">Quantity</div>
-                                            <div class="cart_item_text">{{ $item['quantity'] }}</div> <!-- Akses quantity dari array $item -->
-                                        </div>
-                                        <div class="cart_item_price cart_info_col">
-                                            <div class="cart_item_title">Price</div>
-                                            <div class="cart_item_text">Rp. {{ number_format($item['price'], 2) }}</div> <!-- Akses price dari array $item -->
-                                        </div>
-                                        <div class="cart_item_total cart_info_col">
-                                            <div class="cart_item_title">Total</div>
-                                            <div class="cart_item_text">Rp. {{ number_format($item['price'] * $item['quantity'], 2) }}</div> <!-- Hitung total berdasarkan quantity dan price -->
-                                        </div>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-
-                    <!-- Order Total -->
-                    <div class="order_total">
-                        <div class="order_total_content text-md-right">
-                            <div class="order_total_title">Order Total:</div>
-                            <div class="order_total_amount">Rp. {{ number_format($totalPrice, 2) }}</div> <!-- Total harga -->
-                        </div>
-                    </div>
-					<div class="cart_buttons">
-    <form action="{{ route('cart.checkout') }}" method="POST">
-        @csrf
-        <button type="submit" class="button cart_button_checkout">Checkout</button>
-    </form>
-</div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+	
+	<div class="banner">
+		<div class="banner_background" style="background-image:url(images/banner_background.jpg)"></div>
+		<div class="container fill_height">
+			<div class="row fill_height">
+				<div class="banner_product_image"><img src="images/banner_product.png" alt=""></div>
+				<div class="col-lg-5 offset-lg-4 fill_height">
+					<div class="banner_content">
+						<h1 class="banner_text">New Era of Digital Printing Solutions</h1>
+						<div class="banner_price"><span></span></div>
+						<div class="banner_product_name"></div>
+						<div class="banner3"><a href="#"></a></div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- Footer -->
+
+	<!-- Deals of the week -->
+
+	<div class="deals_featured">
+		<div class="container">
+			<div class="row">
+				<div class="col d-flex flex-lg-row flex-column align-items-center justify-content-start">
+				
+					
+<!-- Featured -->
+<div class="featured">
+    <div class="tabbed_container">
+        <div class="tabs">
+            <ul class="clearfix">
+                <li class="active">Pilih Produk</li>
+            </ul>
+            <div class="tabs_line"><span></span></div>
+        </div>
+
+        <!-- Product Panel -->
+        <div class="product_panel panel active">
+            <div class="featured_slider slider">
+                @foreach ($products as $product)
+                <!-- Slider Item -->
+                <div class="featured_slider_item">
+                    <div class="border_active"></div>
+                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
+                        
+                        <!-- Gambar Produk -->
+                        @if($product->image)
+                            <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                                <img src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->name }}">
+                            </div>
+                        @else
+                            <p>No image available</p>
+                        @endif
+
+                        <div class="product_content">
+                            <!-- Harga Produk -->
+                            <div class="product_price">
+                                Rp. {{ number_format($product->price, 2) }}
+                            </div>
+
+                            <!-- Nama Produk -->
+                            <div class="product_name">
+                                <div><a href="{{ route('product.show', $product->id) }}">{{ $product->name }}</a></div>
+                            </div>
+
+                            <div class="product_extras">
+                                <!-- Tombol Add to Cart -->
+                                <button onclick="window.location.href='{{ route('product.show', ['id' => $product->id]) }}'" class="product_cart_button">Add to Cart</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product_fav">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</div>
+
+							<!-- Product Panel -->
+
+							<div class="product_panel panel">
+								<div class="featured_slider slider">
+								</div>
+								<div class="featured_slider_dots_cover"></div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<footer class="footer">
 		<div class="container">
@@ -285,7 +345,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		</div>
 	</div>
 </div>
-
         <script src="{{ url('js/jquery-3.3.1.min.js')}}"></script>
         <script src="{{ url('css/bootstrap4/popper.js')}}"></script>
         <script src="{{ url('css/bootstrap4/bootstrap.min.js')}}"></script>
@@ -294,8 +353,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         <script src="{{ url('plugins/scrollmagic/ScrollMagic.min.js')}}"></script>
         <script src="{{ url('plugins/greensock/animation.gsap.min.js')}}"></script>
         <script src="{{ url('plugins/greensock/ScrollToPlugin.min.js')}}"></script>
+        <script src="{{ url('plugins/OwlCarousel2-2.2.1/owl.carousel.js')}}"></script>
+        <script src="{{ url('plugins/slick-1.8.0/slick.js')}}"></script>
         <script src="{{ url('plugins/easing/easing.js')}}"></script>
-        <script src="{{ url('(js/cart_custom.js')}}"></script>
-</body>
-
+        <script src="{{ url('js/custom.js')}}"></script>
+    </body>
 </html>
