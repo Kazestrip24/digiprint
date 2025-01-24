@@ -1,7 +1,7 @@
 cara penggunaan 
-Clone Projek
 
-  git clone 
+Clone Projek
+  git clone " https://github.com/Kazestrip24/digiprint.git "
 Masuk ke folder dengan perintah
 
   cd nama_projek
