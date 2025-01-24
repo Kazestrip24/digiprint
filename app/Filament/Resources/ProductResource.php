@@ -50,6 +50,7 @@ class ProductResource extends Resource
                     ->required()
                     ->maxSize(1024) // Ukuran file maksimal 1MB
                     ->acceptedFileTypes(['image/*']), // Hanya menerima file gambar
+                    
 
                 Forms\Components\Select::make('category_id')
                     ->relationship('category', 'name')
@@ -69,6 +70,7 @@ class ProductResource extends Resource
                 ImageColumn::make('image')
                 ->label('Gambar Produk')
                 ->disk('public')
+                ->getStateUsing(fn ($record) => $record->image ? 'products/' . $record->image : null) // Tambahkan path 'products/' jika ada gambar
                 ->width (20)
                 ->height(20),
                 TextColumn::make('created_at')->label('Tanggal Dibuat')->date(),

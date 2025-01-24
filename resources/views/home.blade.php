@@ -29,7 +29,7 @@
 							<div class="top_bar_user">
 								<div class="user_icon"><img src="images/user.svg" alt=""></div>
 								@guest
-								<div><a href="#">Register</a></div>
+								<div><a href="{{ route('register') }}">Register</a></div>
 								<div><a href="{{ route('login') }}">Sign in</a></div>
 								@else
 								    <!-- Tombol logout untuk pengguna yang sudah login -->
@@ -54,7 +54,7 @@
 					<!-- Logo -->
 					<div class="col-lg-2 col-sm-3 col-3 order-1">
 						<div class="logo_container">
-							<div class="logo"><a href="#">DigiPrint</a></div>
+							<div class="logo"><a href="{{ url('/') }}">DigiPrint</a></div>
 						</div>
 					</div>
 
@@ -70,12 +70,9 @@
 												<span class="custom_dropdown_placeholder clc">All Categories</span>
 												<i class="fas fa-chevron-down"></i>
 												<ul class="custom_list clc">
-													<li><a class="clc" href="#">All Categories</a></li>
-													<li><a class="clc" href="#">Computers</a></li>
-													<li><a class="clc" href="#">Laptops</a></li>
-													<li><a class="clc" href="#">Cameras</a></li>
-													<li><a class="clc" href="#">Hardware</a></li>
-													<li><a class="clc" href="#">Smartphones</a></li>
+												@foreach($categories as $category)
+														<li><a class="clc" href="{{ route('category.show', $category->id) }}">{{ $category->name }}</a></li>
+														@endforeach
 												</ul>
 											</div>
 										</div>
@@ -92,8 +89,6 @@
 							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
 								<div class="wishlist_icon"><img src="images/heart.png" alt=""></div>
 								<div class="wishlist_content">
-									<div class="wishlist_text"><a href="#">Wishlist</a></div>
-									<div class="wishlist_count"></div>
 								</div>
 							</div>
 
@@ -102,11 +97,11 @@
 								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
 									<div class="cart_icon">
 										<img src="images/cart.png" alt="">
-										<div class="cart_count"><span>10</span></div>
+										<div class="cart_count"><span>{{ count(session()->get('cart', [])) }}</span></div>
 									</div>
 									<div class="cart_content">
-										<div class="cart_text"><a href="#">Cart</a></div>
-										<div class="cart_price"></div>
+										<div class="cart_text"><a href="{{ route('cart.index') }}">Cart</a></div>
+										<div class="cart_price">${{ number_format($totalPrice ?? 0, 2) }}</div>
 									</div>
 								</div>
 							</div>
@@ -145,7 +140,6 @@
 							<div class="main_nav_menu ml-auto">
 								<ul class="standard_dropdown main_nav_dropdown">
 									<li><a href="{{ url('welcome') }}">Home<i class="fas fa-chevron-down"></i></a></li>
-									<li><a href="#">Tentang Kami<i class="fas fa-chevron-down"></i></a></li>
 									<li><a href="{{ url('kontak') }}">Hubungi Kami<i class="fas fa-chevron-down"></i></a></li>
 								</ul>
 							</div>
@@ -321,28 +315,6 @@
 								<li><a href="#"><i class="fab fa-vimeo-v"></i></a></li>
 							</ul>
 						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-2 offset-lg-2">
-					<div class="footer_column">
-						<div class="footer_title">Pembeli</div>
-						<ul class="footer_list">
-							<li><a href="#">Cara Belanja</a></li>
-							<li><a href="#">Cara Memberi Ulasan</a></li>
-							<li><a href="#">Cara Komplain</a></li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="col-lg-2">
-					<div class="footer_column">
-						<div class="footer_title">Toko Online</div>
-						<ul class="footer_list">
-							<li><a href="#">Tentang Kami</a></li>
-							<li><a href="#">Hubungi Kami</a></li>
-							<li><a href="#">Kerjasama</a></li>
-						</ul>
 					</div>
 				</div>
 
